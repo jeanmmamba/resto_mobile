@@ -6,6 +6,7 @@ import 'package:restaurant_mobile_app/core/contants/api_constante.dart';
 import 'package:restaurant_mobile_app/core/models/api_response.dart';
 import 'package:dio/dio.dart';
 import 'package:restaurant_mobile_app/widgets/categorie_widget.dart';
+import 'package:restaurant_mobile_app/pages/articles/articlePage.dart';
 
 class CategorieList extends StatefulWidget {
   static String routeName = '/CategoriesListe';
@@ -22,16 +23,17 @@ class _CategorieListState extends State<CategorieList> {
     final response = await dio.get(ApiConst.baseUrl + ApiConst.getCategorieUrl);
 
     if (response.statusCode == 200) {
-      ApiResponse apiResponse = ApiResponse.fromJson(Map.from(response.data));
-
+      ApiResponse apiResponse = apiResponseFromJson(
+        json.encode(response.data),
+      );
       print(response.data);
-
       if (apiResponse.success) {
         setState(() {
-          categorieData = categoryFromJson(response.data['data']['data']);
+          categorieData = categoryFromJson(
+            json.encode(apiResponse.data),
+          );
           loading = false;
         });
-        print(response.data['data']['data']);
       }
     } else {
       print(response);
@@ -72,7 +74,14 @@ class _CategorieListState extends State<CategorieList> {
                       mainAxisSpacing: 0.3),
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () => {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => ArticlePage(
+                                  //articleData: categorieData[index].article,
+                                  )),
+                        ),
+                      },
                       child:
                           CategorieWidget(categorieData: categorieData[index]),
                     );
