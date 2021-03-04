@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:restaurant_mobile_app/pages/categories/models/category_model.dart';
 
 class CategorieWidget extends StatefulWidget {
   final categorieData;
@@ -14,7 +14,7 @@ class _CategorieWidgetState extends State<CategorieWidget> {
     return buildCategorie(widget.categorieData);
   }
 
-  Widget buildCategorie(Category categorie) {
+  Widget buildCategorie(categorie) {
     return Container(
       height: 50.0,
       width: 100.0,

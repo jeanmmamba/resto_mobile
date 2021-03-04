@@ -15,7 +15,7 @@ class CategorieList extends StatefulWidget {
 }
 
 class _CategorieListState extends State<CategorieList> {
-  List<Category> categorieData;
+  CategorieData categorieData;
   bool loading = true;
 
   getCategorie() async {
@@ -29,7 +29,7 @@ class _CategorieListState extends State<CategorieList> {
       print(response.data);
       if (apiResponse.success) {
         setState(() {
-          categorieData = categoryFromJson(
+          categorieData = categorieDataFromJson(
             json.encode(apiResponse.data),
           );
           loading = false;
@@ -67,7 +67,7 @@ class _CategorieListState extends State<CategorieList> {
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
-                  itemCount: categorieData.length,
+                  itemCount: categorieData.data.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 3.0,
@@ -82,8 +82,8 @@ class _CategorieListState extends State<CategorieList> {
                                   )),
                         ),
                       },
-                      child:
-                          CategorieWidget(categorieData: categorieData[index]),
+                      child: CategorieWidget(
+                          categorieData: categorieData.data[index]),
                     );
                   },
                 ),
