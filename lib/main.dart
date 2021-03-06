@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_mobile_app/widgets/article_widget.dart';
 import 'package:restaurant_mobile_app/pages/home_page.dart';
 import 'package:restaurant_mobile_app/pages/TabsPage.dart';
+import 'package:restaurant_mobile_app/pages/articles/articlePage.dart';
 
 void main() {
   runApp(

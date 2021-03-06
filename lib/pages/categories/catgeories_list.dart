@@ -15,7 +15,7 @@ class CategorieList extends StatefulWidget {
 }
 
 class _CategorieListState extends State<CategorieList> {
-  CategorieData categorieData;
+  List<CategorieData> categorieData;
   bool loading = true;
 
   getCategorie() async {
@@ -67,7 +67,7 @@ class _CategorieListState extends State<CategorieList> {
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
-                  itemCount: categorieData.data.length,
+                  itemCount: categorieData.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 3.0,
@@ -77,13 +77,14 @@ class _CategorieListState extends State<CategorieList> {
                       onTap: () => {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => ArticlePage(
-                                  //articleData: categorieData[index].article,
-                                  )),
+                            builder: (context) => ArticlePage(
+                              articleData: categorieData[index].article,
+                            ),
+                          ),
                         ),
                       },
-                      child: CategorieWidget(
-                          categorieData: categorieData.data[index]),
+                      child:
+                          CategorieWidget(categorieData: categorieData[index]),
                     );
                   },
                 ),
